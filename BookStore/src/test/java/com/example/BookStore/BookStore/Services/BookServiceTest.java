@@ -70,7 +70,7 @@ public class BookServiceTest {
 
         when(modelMapper.map(bookEntity, BookDTO.class)).thenReturn(BookDTO);
 
-        List<BookDTO> foundBookDTOList = bookService.getBookByName("Test Book");
+        List<BookDTO> foundBookDTOList = bookService.getBooksByName("Test Book");
 
         assertNotNull(foundBookDTOList);
         assertEquals(1, foundBookDTOList.size());
@@ -84,7 +84,7 @@ public class BookServiceTest {
     public void testGetBookByNameNotFound() {
         when(bookRepository.findByName("Test Book")).thenReturn(Collections.emptyList());
 
-        ResourceNotFound exception = assertThrows(ResourceNotFound.class, () -> bookService.getBookByName("Test Book"));
+        ResourceNotFound exception = assertThrows(ResourceNotFound.class, () -> bookService.getBooksByName("Test Book"));
 
         assertEquals("No book of this name found", exception.getMessage());
     }

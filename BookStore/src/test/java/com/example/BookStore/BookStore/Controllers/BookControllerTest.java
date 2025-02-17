@@ -60,7 +60,7 @@ public class BookControllerTest {
         BookDTO BookDTO2 = new BookDTO("Book 1", "Author 2", "67890", "Publisher",240.00, 25.0, 15, 7, 3);
         List<BookDTO> BookDTOList = List.of(BookDTO1, BookDTO2);
 
-        when(bookService.getBookByName("Book 1")).thenReturn(BookDTOList);
+        when(bookService.getBooksByName("Book 1")).thenReturn(BookDTOList);
 
         mockMvc.perform(get("/book/name/{bookName}", "Book 1")
                         .contentType(MediaType.APPLICATION_JSON))
@@ -71,7 +71,7 @@ public class BookControllerTest {
 
     @Test
     public void testGetBookByNameNotFound() throws Exception {
-        when(bookService.getBookByName(anyString())).thenReturn(null);
+        when(bookService.getBooksByName(anyString())).thenReturn(null);
 
         mockMvc.perform(get("/book/name/{bookName}", "NonExistentBook")
                         .contentType(MediaType.APPLICATION_JSON))

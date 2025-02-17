@@ -28,17 +28,13 @@ public class BookController {
                     .collect(Collectors.toList());
             return new ResponseEntity<>(errorMessages,HttpStatus.BAD_REQUEST);
         }
-        try {
-            BookDTO newBook = bookService.addBook(bookDTO);
-            return new ResponseEntity<>(newBook, HttpStatus.CREATED);
-        } catch (ResourceAlreadyExist e) {
-            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
-        }
+        BookDTO newBook = bookService.addBook(bookDTO);
+        return new ResponseEntity<>(newBook, HttpStatus.CREATED);
     }
 
     @GetMapping("/name/{bookName}")
     public ResponseEntity<List<BookDTO>> getBookByName(@PathVariable String bookName) {
-        List<BookDTO> bookDTOList = bookService.getBookByName(bookName);
+        List<BookDTO> bookDTOList = bookService.getBooksByName(bookName);
         return (bookDTOList ==null) ? new ResponseEntity<>(HttpStatus.NOT_FOUND) : new ResponseEntity<>(bookDTOList, HttpStatus.OK);
     }
 

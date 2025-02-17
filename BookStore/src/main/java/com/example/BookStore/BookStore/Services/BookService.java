@@ -30,7 +30,7 @@ public class BookService {
         return modelMapper.map(bookEntity, BookDTO.class);
     }
 
-    public List<BookDTO> getBookByName(String bookName) {
+    public List<BookDTO> getBooksByName(String bookName) {
         List<BookEntity> bookEntities = bookRepository.findByName(bookName);
         if (bookEntities.isEmpty()) {
             throw new ResourceNotFound("No book of this name found");
