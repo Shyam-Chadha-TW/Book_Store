@@ -109,7 +109,6 @@ public class BookServiceTest {
         verify(bookRepository, times(1)).save(bookEntity);
     }
 
-
     @Test
     public void testDeleteBookByIsbn() {
         bookEntity.setIsbn("1234567890123");
@@ -182,7 +181,6 @@ public class BookServiceTest {
 
         verify(bookRepository, times(1)).saveAndFlush(bookEntity);
     }
-
 
     @Test
     public void testReturnBookWithNoRentedCopies() {
