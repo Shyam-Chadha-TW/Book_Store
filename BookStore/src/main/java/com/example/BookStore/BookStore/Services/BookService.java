@@ -35,7 +35,9 @@ public class BookService {
         if (bookEntities.isEmpty()) {
             throw new ResourceNotFound("No book of this name found");
         }
-        return bookEntities.stream().map(bookEntity -> modelMapper.map(bookEntity, BookDTO.class)).collect(Collectors.toList());
+        return bookEntities.stream()
+                .map(bookEntity -> modelMapper.map(bookEntity, BookDTO.class))
+                .collect(Collectors.toList());
     }
 
     public BookDTO getBookByIsbn(String isbn) {
@@ -73,7 +75,9 @@ public class BookService {
 
     @Transactional
     public BookDTO rentBook(String isbn) {
-        BookEntity bookEntity = bookRepository.findByIsbn(isbn).orElseThrow(()->new ResourceNotFound("ISBN not found!!"));
+        BookEntity bookEntity = bookRepository
+                .findByIsbn(isbn)
+                .orElseThrow(()->new ResourceNotFound("ISBN not found!!"));
 
         if(bookEntity.getAvailableQuantity() == 0){
             throw new ResourceNotAvailable("All the Books are Rented");
